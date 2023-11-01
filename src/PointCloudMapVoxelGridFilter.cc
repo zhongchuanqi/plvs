@@ -127,7 +127,7 @@ void PointCloudMapVoxelGridFilter<PointT>::OnMapChange()
 template<typename PointT>
 PointCloudMapModel<PointT>::PointCloudMapModel()
 {
-    pPointCloud_ = boost::make_shared< PointCloudT >();     
+    pPointCloud_ = std::make_shared< PointCloudT >();     
 }
 
 template<typename PointT>

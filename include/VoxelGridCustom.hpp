@@ -112,9 +112,9 @@ inline void pcl::VoxelGridCustom<pcl::PointSurfelSegment>::applyFilter (PointClo
     {
       if (!input_->is_dense)
         // Check if the point is invalid
-        if (!pcl_isfinite (input_->points[*it].x) || 
-            !pcl_isfinite (input_->points[*it].y) || 
-            !pcl_isfinite (input_->points[*it].z))
+        if (!std::isfinite (input_->points[*it].x) || 
+            !std::isfinite (input_->points[*it].y) || 
+            !std::isfinite (input_->points[*it].z))
           continue;
 
       // Get the distance value
@@ -154,9 +154,9 @@ inline void pcl::VoxelGridCustom<pcl::PointSurfelSegment>::applyFilter (PointClo
     {
       if (!input_->is_dense)
         // Check if the point is invalid
-        if (!pcl_isfinite (input_->points[*it].x) || 
-            !pcl_isfinite (input_->points[*it].y) || 
-            !pcl_isfinite (input_->points[*it].z))
+        if (!std::isfinite (input_->points[*it].x) || 
+            !std::isfinite (input_->points[*it].y) || 
+            !std::isfinite (input_->points[*it].z))
           continue;
 
       int ijk0 = static_cast<int> (floor (input_->points[*it].x * inverse_leaf_size_[0]) - static_cast<float> (min_b_[0]));

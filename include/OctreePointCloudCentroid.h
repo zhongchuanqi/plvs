@@ -24,9 +24,9 @@
 
 #include <pcl/common/transforms.h>
 #include <pcl/filters/voxel_grid.h>
-#include <pcl/octree/octree_pointcloud.h>
-#include <pcl/octree/octree_pointcloud_singlepoint.h>
+#include <pcl/octree/octree.h>
 #include <pcl/octree/octree_impl.h>
+#include <pcl/octree/octree_pointcloud_adjacency.h>
 
 
 

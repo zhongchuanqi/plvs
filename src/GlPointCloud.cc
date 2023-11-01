@@ -91,7 +91,7 @@ void GlPointCloud<PointT>::SetFaces(const std::vector<uint32_t>& faces)
 template<typename PointT>
 void GlPointCloud<PointT>::SetTransform(const Eigen::Affine3d& T)
 {
-    typename PointCloudT::Ptr pCloudOut = boost::make_shared< PointCloudT >();
+    typename PointCloudT::Ptr pCloudOut = std::make_shared< PointCloudT >();
 
     bool bNormalAvailable = pcl::traits::has_field<PointT, pcl::fields::normal_x>::value;
     if(!bNormalAvailable)
@@ -283,7 +283,7 @@ void GlPointCloud<PointT>::SetType(const GlObjectType& type)
 template<typename PointT>
 bool GlPointCloud<PointT>::Load(const std::string& filename)
 {
-    typename PointCloudT::Ptr pCloudIn = boost::make_shared< PointCloudT >();        
+    typename PointCloudT::Ptr pCloudIn = std::make_shared< PointCloudT >();        
     
     std::cout << "GlPointCloud::LoadMap(): " << filename << std::endl;     
     {

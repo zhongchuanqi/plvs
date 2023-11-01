@@ -52,8 +52,8 @@ mpMap(pMap), pPointCloudMapParameters_(params), lastTimestamp_(0), bMapUpdated_(
 {
     PLVS_ASSERT(mpMap!=NULL,"PointCloudMap should be initialized with a valid Map!");
         
-    pPointCloud_ = boost::make_shared< PointCloudT >();
-    pPointCloudUnstable_ = boost::make_shared< PointCloudT >();
+    pPointCloud_ = std::make_shared< PointCloudT >();
+    pPointCloudUnstable_ = std::make_shared< PointCloudT >();
 }
 
 template<typename PointT>
