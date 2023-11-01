@@ -21,7 +21,7 @@
 
 #ifndef CHUNK_H_
 #define CHUNK_H_
-
+#include <cassert>
 #include <memory>
 #include <vector>
 #include <Eigen/Core>

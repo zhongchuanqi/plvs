@@ -22,7 +22,7 @@
 
 #ifndef PLY_H_
 #define PLY_H_
-
+#include <cassert>
 #include <string>
 #include <open_chisel/geometry/Geometry.h>
 #include <open_chisel/mesh/Mesh.h>

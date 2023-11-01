@@ -2,7 +2,7 @@
 #define RAYCAST_H_
 
 #include "Geometry.h"
-
+#include <cassert>
 float signum(float x);
 float mod(float value, float modulus);
 float intbound(float s, float ds);

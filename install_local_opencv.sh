@@ -66,7 +66,7 @@ if [ ! -d Thirdparty/opencv ]; then
             sudo apt install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev 
             sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"  # for libjasper-dev 
             sudo apt install -y libjasper-dev
-            sudo apt install -y libv4l-dev libdc1394-22-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm \
+            sudo apt install -y libv4l-dev libdc1394-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm \
                                     libopencore-amrnb-dev libopencore-amrwb-dev libxine2-dev            
         fi
         if [[ $version == *"18.04"* ]] ; then
@@ -145,6 +145,7 @@ if [ ! -f opencv/install/lib/libopencv_core.so ]; then
           -DOPENCV_ENABLE_NONFREE=ON \
           -DBUILD_opencv_java=OFF \
           -DBUILD_opencv_python3=ON \
+          -DCMAKE_CXX_STANDARD=17 \
           -Wno-deprecated-gpu-targets ..
     else
         # Nvidia Jetson aarch64

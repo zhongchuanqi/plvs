@@ -21,7 +21,7 @@
 
 #ifndef PINHOLECAMERA_H_
 #define PINHOLECAMERA_H_
-
+#include <cassert>
 #include <memory>
 #include <open_chisel/geometry/Geometry.h>
 #include <open_chisel/geometry/Frustum.h>

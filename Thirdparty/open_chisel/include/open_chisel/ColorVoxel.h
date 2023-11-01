@@ -21,7 +21,7 @@
 
 #ifndef COLORVOXEL_H_
 #define COLORVOXEL_H_
-
+#include <cassert>
 #include <algorithm>
 #include <limits>
 #include <stdint.h>

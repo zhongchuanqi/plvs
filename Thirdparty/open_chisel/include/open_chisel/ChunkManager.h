@@ -21,7 +21,7 @@
 
 #ifndef CHUNKMANAGER_H_
 #define CHUNKMANAGER_H_
-
+#include <cassert>
 #include <memory>
 #include <unordered_map>
 #include <mutex>

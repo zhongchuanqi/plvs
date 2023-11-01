@@ -22,7 +22,7 @@
 
 #ifndef INTERPOLATE_H_
 #define INTERPOLATE_H_
-
+#include <cassert>
 namespace chisel
 {
     inline float LinearInterpolate(float s, float e, float t)

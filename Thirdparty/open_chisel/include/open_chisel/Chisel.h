@@ -21,7 +21,7 @@
 
 #ifndef CHISEL_H_
 #define CHISEL_H_
-
+#include <cassert>
 #include <open_chisel/threading/Threading.h>
 #include <open_chisel/ChunkManager.h>
 #include <open_chisel/ProjectionIntegrator.h>

@@ -895,8 +895,9 @@ int PointCloudMapOctreePointCloud<PointT>::UpdateMapNoSegmNoRemoveUnstable()
     //const int threshold = this->nPointCounterThreshold_ - 1;
     const unsigned int threshold = std::max(this->pPointCloudMapParameters_->nPointCounterThreshold - 1, 0);    
     
-    typename OctreeType::LeafNodeIterator it, itEnd;
-    for (it = octree_.leaf_begin(), itEnd = octree_.leaf_end(); it != itEnd; it++)
+    auto it = octree_.begin();
+    auto itEnd = octree_.end();
+    for (; it != itEnd; it++)
     {
         //if(it.getCurrentOctreeDepth() == octree_.getTreeDepth())
         {
@@ -945,8 +946,9 @@ int PointCloudMapOctreePointCloud<PointT>::UpdateMapNoSegm()
     //const int threshold = this->nPointCounterThreshold_ - 1;
     const unsigned int threshold = std::max(this->pPointCloudMapParameters_->nPointCounterThreshold - 1, 0);    
 
-    typename OctreeType::LeafNodeIterator it, itEnd;
-    for (it = octree_.leaf_begin(), itEnd = octree_.leaf_end(); it != itEnd; it++)
+    auto it = octree_.begin();
+    auto itEnd = octree_.end();
+    for (; it != itEnd; it++)
     {
         //if(it.getCurrentOctreeDepth() == octree_.getTreeDepth())
         {
@@ -1018,8 +1020,9 @@ int PointCloudMapOctreePointCloud<PointT>::UpdateMapSegm()
     //mapLabelsCardinality.clear();
 #endif
 
-    typename OctreeType::LeafNodeIterator it, itEnd;
-    for (it = octree_.leaf_begin(), itEnd = octree_.leaf_end(); it != itEnd; it++)
+    auto it = octree_.begin();
+    auto itEnd = octree_.end();
+    for (; it != itEnd; it++)
     {
         //if(it.getCurrentOctreeDepth() == octree_.getTreeDepth())
         {
@@ -1179,8 +1182,9 @@ void PointCloudMapOctreePointCloud<pcl::PointSurfelSegment>::OnMapChange()
         }
                 
         // set the counters of all the inserted points at the minimum threshold 
-        typename OctreeType::LeafNodeIterator it, itEnd;
-        for (it = octree_.leaf_begin(), itEnd=octree_.leaf_end(); it != itEnd; it++)
+        auto it = octree_.begin();
+        auto itEnd = octree_.end();
+        for (; it != itEnd; it++)
         {
             //if(it.getCurrentOctreeDepth() == octree_.getTreeDepth())
             {
@@ -1229,8 +1233,9 @@ bool PointCloudMapOctreePointCloud<PointT>::LoadMap(const std::string& filename)
         this->InsertCloud(this->pPointCloud_);
 
         // set the counters of all the inserted points at the minimum threshold 
-        typename OctreeType::LeafNodeIterator it, itEnd;
-        for (it = octree_.leaf_begin(), itEnd = octree_.leaf_end(); it != itEnd ; it++)
+        auto it = octree_.begin();
+        auto itEnd = octree_.end();
+        for (; it != itEnd ; it++)
         {
             //if(it.getCurrentOctreeDepth() == octree_.getTreeDepth())
             {

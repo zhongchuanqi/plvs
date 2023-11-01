@@ -21,7 +21,7 @@
 
 #ifndef AABB_H_
 #define AABB_H_
-
+#include <cassert>
 #include <memory>
 #include <Eigen/Core>
 

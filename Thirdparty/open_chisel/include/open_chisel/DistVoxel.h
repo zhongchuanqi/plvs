@@ -21,7 +21,7 @@
 
 #ifndef DISTVOXEL_H_
 #define DISTVOXEL_H_
-
+#include <cassert>
 #include <limits>
 #include <stdint.h>
 #include <Eigen/Core>

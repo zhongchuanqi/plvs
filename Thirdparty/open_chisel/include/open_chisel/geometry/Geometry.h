@@ -22,7 +22,7 @@
 
 #ifndef CHISEL_GEOMETRY_H_
 #define CHISEL_GEOMETRY_H_
-
+#include <cassert>
 #include <vector>
 #include <unordered_map>
 

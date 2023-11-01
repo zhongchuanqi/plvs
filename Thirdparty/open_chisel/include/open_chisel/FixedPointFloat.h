@@ -22,7 +22,7 @@
 
 #ifndef FIXEDPOINTFLOAT_H_
 #define FIXEDPOINTFLOAT_H_
-
+#include <cassert>
 #include <algorithm>
 
 namespace chisel

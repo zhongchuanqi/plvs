@@ -21,7 +21,7 @@
 
 #ifndef MESH_H_
 #define MESH_H_
-
+#include <cassert>
 #include <memory>
 #include <vector>
 #include <open_chisel/geometry/Geometry.h>
