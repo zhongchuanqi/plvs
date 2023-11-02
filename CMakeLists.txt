@@ -88,8 +88,9 @@ else()
 
     message(AUTHOR_WARNING "\n!!!Compiling in Debug mode!!!\n")
     # Debug
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3  -g")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3  -g")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3  -g -fsanitize=address  -fno-omit-frame-pointer -fsanitize=undefined")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3  -g -fsanitize=address  -fno-omit-frame-pointer -fsanitize=undefined")
+    
 
     # Debug with g2o compiled with -march=native; this should avoid g2o crash (see "Mismatched build flags" on https://github.com/ethz-asl/eigen_catkin/wiki/Eigen-Memory-Issues#memory-misalignment )
     #set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -g -O3 -march=native -fPIC -pthread ") # -fsanitize=address
@@ -541,7 +542,7 @@ add_library(${PROJECT_NAME} ${LIBRARY_TYPE}
 )
 
 target_link_libraries(${PROJECT_NAME}
-${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+ asan ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 
 set(CORE_LIBS ${PROJECT_NAME})
@@ -558,12 +559,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/RGB-D)
 
 add_executable(rgbd_tum
         Examples/RGB-D/rgbd_tum.cc)
-target_link_libraries(rgbd_tum ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(rgbd_tum  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(rgbd_realsense_D435i
             Examples/RGB-D/rgbd_realsense_D435i.cc)
-    target_link_libraries(rgbd_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(rgbd_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 
@@ -573,7 +574,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/RGB-D-Inertial
 if(realsense2_FOUND)
     add_executable(rgbd_inertial_realsense_D435i
             Examples/RGB-D-Inertial/rgbd_inertial_realsense_D435i.cc)
-    target_link_libraries(rgbd_inertial_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(rgbd_inertial_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Stereo examples
@@ -581,24 +582,24 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo)
 
 add_executable(stereo_kitti
         Examples/Stereo/stereo_kitti.cc)
-target_link_libraries(stereo_kitti ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_kitti  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(stereo_euroc
         Examples/Stereo/stereo_euroc.cc)
-target_link_libraries(stereo_euroc ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_euroc  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(stereo_tum_vi
         Examples/Stereo/stereo_tum_vi.cc)
-target_link_libraries(stereo_tum_vi ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_tum_vi  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(stereo_realsense_t265
             Examples/Stereo/stereo_realsense_t265.cc)
-    target_link_libraries(stereo_realsense_t265 ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_realsense_t265  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(stereo_realsense_D435i
             Examples/Stereo/stereo_realsense_D435i.cc)
-    target_link_libraries(stereo_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Monocular examples
@@ -606,28 +607,28 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
 
 add_executable(mono_tum
         Examples/Monocular/mono_tum.cc)
-target_link_libraries(mono_tum ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_tum  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_kitti
         Examples/Monocular/mono_kitti.cc)
-target_link_libraries(mono_kitti ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_kitti  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_euroc
         Examples/Monocular/mono_euroc.cc)
-target_link_libraries(mono_euroc ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_euroc  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_tum_vi
         Examples/Monocular/mono_tum_vi.cc)
-target_link_libraries(mono_tum_vi ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_tum_vi  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(mono_realsense_t265
             Examples/Monocular/mono_realsense_t265.cc)
-    target_link_libraries(mono_realsense_t265 ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_realsense_t265  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(mono_realsense_D435i
             Examples/Monocular/mono_realsense_D435i.cc)
-    target_link_libraries(mono_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Monocular inertial examples
@@ -635,20 +636,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular-Iner
 
 add_executable(mono_inertial_euroc
         Examples/Monocular-Inertial/mono_inertial_euroc.cc)
-target_link_libraries(mono_inertial_euroc ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_inertial_euroc  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_inertial_tum_vi
         Examples/Monocular-Inertial/mono_inertial_tum_vi.cc)
-target_link_libraries(mono_inertial_tum_vi ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_inertial_tum_vi  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(mono_inertial_realsense_t265
             Examples/Monocular-Inertial/mono_inertial_realsense_t265.cc)
-    target_link_libraries(mono_inertial_realsense_t265 ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_inertial_realsense_t265  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(mono_inertial_realsense_D435i
             Examples/Monocular-Inertial/mono_inertial_realsense_D435i.cc)
-    target_link_libraries(mono_inertial_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_inertial_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Stereo Inertial examples
@@ -656,31 +657,31 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo-Inertia
 
 add_executable(stereo_inertial_euroc
         Examples/Stereo-Inertial/stereo_inertial_euroc.cc)
-target_link_libraries(stereo_inertial_euroc ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_inertial_euroc  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(stereo_inertial_tum_vi
         Examples/Stereo-Inertial/stereo_inertial_tum_vi.cc)
-target_link_libraries(stereo_inertial_tum_vi ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_inertial_tum_vi  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(stereo_inertial_realsense_t265
             Examples/Stereo-Inertial/stereo_inertial_realsense_t265.cc)
-    target_link_libraries(stereo_inertial_realsense_t265 ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_inertial_realsense_t265  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(stereo_inertial_realsense_D435i
             Examples/Stereo-Inertial/stereo_inertial_realsense_D435i.cc)
-    target_link_libraries(stereo_inertial_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_inertial_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Calibration)
 if(realsense2_FOUND)
     add_executable(recorder_realsense_D435i
             Examples/Calibration/recorder_realsense_D435i.cc)
-    target_link_libraries(recorder_realsense_D435i ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(recorder_realsense_D435i  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(recorder_realsense_T265
             Examples/Calibration/recorder_realsense_T265.cc)
-    target_link_libraries(recorder_realsense_T265 ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(recorder_realsense_T265  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 
@@ -691,21 +692,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/RGB-D)
 
 add_executable(rgbd_tum_old
         Examples_old/RGB-D/rgbd_tum.cc)
-target_link_libraries(rgbd_tum_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(rgbd_tum_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 
 add_executable(rgbd_tum_ar 
         Examples_old/RGB-D/rgbd_tum_ar.cc Examples_old/RGB-D/ViewerAR.h Examples_old/RGB-D/ViewerAR.cc)
-target_link_libraries(rgbd_tum_ar ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(rgbd_tum_ar  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(rgbd_inseg
 	Examples_old/RGB-D/rgbd_inseg.cc)
-target_link_libraries(rgbd_inseg ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(rgbd_inseg  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(rgbd_realsense_D435i_old
             Examples_old/RGB-D/rgbd_realsense_D435i.cc)
-    target_link_libraries(rgbd_realsense_D435i_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(rgbd_realsense_D435i_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 
@@ -715,7 +716,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/RGB-D-Iner
 if(realsense2_FOUND)
     add_executable(rgbd_inertial_realsense_D435i_old
             Examples_old/RGB-D-Inertial/rgbd_inertial_realsense_D435i.cc)
-    target_link_libraries(rgbd_inertial_realsense_D435i_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(rgbd_inertial_realsense_D435i_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Stereo examples
@@ -723,24 +724,24 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/Stereo)
 
 add_executable(stereo_kitti_old
         Examples_old/Stereo/stereo_kitti.cc)
-target_link_libraries(stereo_kitti_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_kitti_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(stereo_euroc_old
         Examples_old/Stereo/stereo_euroc.cc)
-target_link_libraries(stereo_euroc_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_euroc_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(stereo_tum_vi_old
         Examples_old/Stereo/stereo_tum_vi.cc)
-target_link_libraries(stereo_tum_vi_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_tum_vi_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(stereo_realsense_t265_old
             Examples_old/Stereo/stereo_realsense_t265.cc)
-    target_link_libraries(stereo_realsense_t265_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_realsense_t265_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(stereo_realsense_D435i_old
             Examples_old/Stereo/stereo_realsense_D435i.cc)
-    target_link_libraries(stereo_realsense_D435i_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_realsense_D435i_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Monocular examples
@@ -748,28 +749,28 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/Monocular)
 
 add_executable(mono_tum_old
         Examples_old/Monocular/mono_tum.cc)
-target_link_libraries(mono_tum_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_tum_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_kitti_old
         Examples_old/Monocular/mono_kitti.cc)
-target_link_libraries(mono_kitti_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_kitti_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_euroc_old
         Examples_old/Monocular/mono_euroc.cc)
-target_link_libraries(mono_euroc_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_euroc_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_tum_vi_old
         Examples_old/Monocular/mono_tum_vi.cc)
-target_link_libraries(mono_tum_vi_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_tum_vi_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(mono_realsense_t265_old
             Examples_old/Monocular/mono_realsense_t265.cc)
-    target_link_libraries(mono_realsense_t265_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_realsense_t265_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(mono_realsense_D435i_old
             Examples_old/Monocular/mono_realsense_D435i.cc)
-    target_link_libraries(mono_realsense_D435i_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_realsense_D435i_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Monocular inertial examples
@@ -777,20 +778,20 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/Monocular-
 
 add_executable(mono_inertial_euroc_old
         Examples_old/Monocular-Inertial/mono_inertial_euroc.cc)
-target_link_libraries(mono_inertial_euroc_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_inertial_euroc_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(mono_inertial_tum_vi_old
         Examples_old/Monocular-Inertial/mono_inertial_tum_vi.cc)
-target_link_libraries(mono_inertial_tum_vi_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(mono_inertial_tum_vi_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(mono_inertial_realsense_t265_old
             Examples_old/Monocular-Inertial/mono_inertial_realsense_t265.cc)
-    target_link_libraries(mono_inertial_realsense_t265_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_inertial_realsense_t265_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(mono_inertial_realsense_D435i_old
             Examples_old/Monocular-Inertial/mono_inertial_realsense_D435i.cc)
-    target_link_libraries(mono_inertial_realsense_D435i_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(mono_inertial_realsense_D435i_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 # Stereo Inertial examples
@@ -798,26 +799,26 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples_old/Stereo-Ine
 
 add_executable(stereo_inertial_euroc_old
         Examples_old/Stereo-Inertial/stereo_inertial_euroc.cc)
-target_link_libraries(stereo_inertial_euroc_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_inertial_euroc_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 add_executable(stereo_inertial_tum_vi_old
         Examples_old/Stereo-Inertial/stereo_inertial_tum_vi.cc)
-target_link_libraries(stereo_inertial_tum_vi_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(stereo_inertial_tum_vi_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(realsense2_FOUND)
     add_executable(stereo_inertial_realsense_t265_old
             Examples_old/Stereo-Inertial/stereo_inertial_realsense_t265.cc)
-    target_link_libraries(stereo_inertial_realsense_t265_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_inertial_realsense_t265_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
     add_executable(stereo_inertial_realsense_D435i_old
             Examples_old/Stereo-Inertial/stereo_inertial_realsense_D435i.cc)
-    target_link_libraries(stereo_inertial_realsense_D435i_old ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+    target_link_libraries(stereo_inertial_realsense_D435i_old  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 endif()
 
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Vocabulary)
 add_executable(bin_vocabulary Vocabulary/bin_vocabulary.cpp)
-target_link_libraries(bin_vocabulary ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
+target_link_libraries(bin_vocabulary  asan ${CORE_LIBS} ${EXTERNAL_LIBS} ${EXTERNAL_CORE_LIBS})
 
 if(EXISTS ${PROJECT_SOURCE_DIR}/test)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/test)
