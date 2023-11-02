@@ -220,7 +220,7 @@ namespace PLVS2 {
         float gyroWalk_, accWalk_;
         float imuFrequency_;
         Sophus::SE3f Tbc_;
-        bool insertKFsWhenLost_;
+        bool insertKFsWhenLost_=true;
 
         /*
          * RGBD stuff

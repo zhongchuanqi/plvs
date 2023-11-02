@@ -7,8 +7,8 @@ project(plvs)
 set(CPP_STANDARD_VERSION "17" CACHE STRING "Desired C++ standard version") # we need c++17 since nvcc does not support c++20 (probably we can try mixing standards and let nvcc use c++17 ... not sure about the result)
 set(OPENCV_VERSION "4" CACHE STRING "Desired OpenCV version") # this is the first target version that is searched for 
 
-set(WITH_FASTFUSION ON  CACHE BOOL  "Add fastfusion support") # for enabling RGBD dense reconstruction via fastfusion (it needs Intel SIMD)
-set(WITH_G2O_NEW    OFF CACHE BOOL "Add g2o new support") # for using the new version of g2o with Cholmod and Csparse solvers (and more...)
+set(WITH_FASTFUSION OFF  CACHE BOOL  "Add fastfusion support") # for enabling RGBD dense reconstruction via fastfusion (it needs Intel SIMD)
+set(WITH_G2O_NEW    ON CACHE BOOL "Add g2o new support") # for using the new version of g2o with Cholmod and Csparse solvers (and more...)
 set(WITH_LIBELAS    ON  CACHE BOOL "Add libelas support")  # for stereo dense reconstruction (it needs Intel SIMD, optionally can be compiled with CUDA)
 set(WITH_LIBSGM     ON  CACHE BOOL "Add stereo libsgm support")  # for stereo dense reconstruction (it needs CUDA)
 set(WITH_OPENMP     ON  CACHE BOOL "Add OpenMP support") # useful for PCL (since we use the macro PCL_NO_PRECOMPILE!)
@@ -88,8 +88,8 @@ else()
 
     message(AUTHOR_WARNING "\n!!!Compiling in Debug mode!!!\n")
     # Debug
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3  -g -fsanitize=address  -fno-omit-frame-pointer -fsanitize=undefined")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3  -g -fsanitize=address  -fno-omit-frame-pointer -fsanitize=undefined")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O0 -g -fsanitize=address  -fno-omit-frame-pointer -fsanitize=undefined")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O0  -g -fsanitize=address  -fno-omit-frame-pointer -fsanitize=undefined")
     
 
     # Debug with g2o compiled with -march=native; this should avoid g2o crash (see "Mismatched build flags" on https://github.com/ethz-asl/eigen_catkin/wiki/Eigen-Memory-Issues#memory-misalignment )

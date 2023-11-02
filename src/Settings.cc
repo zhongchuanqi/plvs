@@ -477,13 +477,15 @@ namespace PLVS2 {
         cv::Mat cvTbc = readParameter<cv::Mat>(fSettings,"IMU.T_b_c1",found);
         Tbc_ = Converter::toSophus(cvTbc);
 
-        readParameter<int>(fSettings,"IMU.InsertKFsWhenLost",found,false);
+        int tmp=readParameter<int>(fSettings,"IMU.InsertKFsWhenLost",found,false);
+        std::cout<<"readParameter<int>(fSettings,IMU.InsertKFsWhenLost,found,false)="<<tmp<<std::endl;
         if(found){
-            insertKFsWhenLost_ = (bool) readParameter<int>(fSettings,"IMU.InsertKFsWhenLost",found,false);
+            insertKFsWhenLost_ = (bool) tmp;
         }
         else{
             insertKFsWhenLost_ = true;
         }
+        std::cout<<"insertKFsWhenLost_="<<insertKFsWhenLost_<<std::endl;
     }
 
     void Settings::readRGBD(cv::FileStorage& fSettings) {

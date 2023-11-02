@@ -255,7 +255,8 @@ class Stopwatch
 
             dataPacket[0] = packetSize * sizeof(unsigned char);
 
-            *((unsigned long long int *)&dataPacket[1]) = signature;
+           // *((unsigned long long int *)&dataPacket[1]) = signature;
+            memcpy(&dataPacket[1],&signature,sizeof(unsigned long long int));
 
             float * valuePointer = (float *)&((unsigned long long int *)&dataPacket[1])[1];
 
@@ -264,7 +265,9 @@ class Stopwatch
                 memcpy(valuePointer, it->first.c_str(), it->first.length() + 1);
                 valuePointer = (float *)((unsigned char *)valuePointer +
                   it->first.length() + 1);
-                *valuePointer++ = it->second;
+
+                memcpy(valuePointer++,&(it->second),sizeof(float));
+                //*valuePointer++ = it->second;
             }
 
             return (unsigned char *)dataPacket;
