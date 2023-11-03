@@ -49,8 +49,10 @@
 
 #include "g2o/types_sba_line.h"
 #include <Eigen/Geometry>
-using namespace Eigen;
+
 namespace g2o {
+
+using namespace Eigen;
 namespace types_six_dof_expmap {
 void init();
 }

@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.txt": "cmake",
         "chrono": "cpp",
         "system_error": "cpp",
         "regex": "cpp",
@@ -85,6 +86,8 @@
         "tensor": "cpp",
         "geometry": "cpp",
         "numericaldiff": "cpp",
-        "specialfunctions": "cpp"
-    }
+        "specialfunctions": "cpp",
+        "cassert": "cpp"
+    },
+    "git.ignoreLimitWarning": true
 }

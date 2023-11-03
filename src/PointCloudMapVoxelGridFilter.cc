@@ -168,7 +168,7 @@ void PointCloudMapModel<PointT>::UpdateCloud(typename PointCloudT::Ptr pCloud)
         }
         else
         {
-            mapKfidToPointList_[kfid] = new PointList(1,ii);
+            mapKfidToPointList_[kfid] = std::make_shared<PointList>(1,ii);
         }
                 
     }
